@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
 
 class Player extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Player extends Component {
       position: 0,
       duration: 0,
       volume: 0,
+      image: "Image",
     };
   }
 
@@ -33,14 +35,16 @@ class Player extends Component {
   //  }
 
   playbackControls(params) {
-    console.log(params);
+    console.log(params.track_window.current_track);
     this.setState({
       trackName: params.track_window.current_track.name,
-      //   artistName: params.track_window.artists.name,
+      artistName: params.track_window.current_track.artists[0].name,
       paused: params.paused,
       playing: params.paused,
       duration: params.duration,
+      image: params.track_window.current_track.album.images[0].url,
     });
+    this.playerposition = setInterval(() => this.getState(), 1000);
   }
 
   createEventHandlers() {
@@ -104,7 +108,7 @@ class Player extends Component {
   playPauseToggle() {
     this.player.togglePlay();
 
-    this.playerposition = setInterval(() => this.getState(), 1000);
+    // this.playerposition = setInterval(() => this.getState(), 1000);
   }
   playNextTrack() {
     this.player.nextTrack();
@@ -136,6 +140,7 @@ class Player extends Component {
         <h1>Spotify Clone</h1>
         {loggedIn ? (
           <div>
+            <Image src={this.state.image} roundedCircle />
             <h1>{this.state.trackName}</h1>
             <h1>{this.state.artistName}</h1>
             <h1>{this.state.playing}</h1>
@@ -153,16 +158,25 @@ class Player extends Component {
                 value={volume}
                 onChange={(e) => this.setState({ volume: e.target.value })}
               />
-              <button onClick={() => this.getState()}>Volume</button>
+              <Button variant="outline-primary" onClick={() => this.getState()}>
+                Volume
+              </Button>
 
-              <button onClick={() => this.changeVolume()}>Change Volume</button>
+              <Button
+                variant="outline-primary"
+                onClick={() => this.changeVolume()}
+              >
+                Change Volume
+              </Button>
             </p>
-            <ProgressBar
-              animated
-              now={this.state.position}
-              max={this.state.duration}
-            />
-            <Button variant="outline-primary">Primary</Button>{" "}
+            <div className="test">
+              <ProgressBar
+                animated
+                now={this.state.position}
+                max={this.state.duration}
+              />
+            </div>
+            <Button variant="outline-primary">Primary</Button>
           </div>
         ) : (
           <div>

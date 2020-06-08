@@ -172,6 +172,10 @@ function MainControl() {
     setVolume(newValue);
     player.setVolume(newValue / 100);
   };
+  const changePosition = (event, newValue) => {
+    setPosition(newValue);
+    player.seek(newValue);
+  };
 
   return (
     <div className="main">
@@ -191,32 +195,45 @@ function MainControl() {
             className={classes.prgbar}
             value={transform(position)}
           />
-
-          {playing ? (
-            <PlayArrowRoundedIcon
-              color="inherit"
-              fontSize="large"
-              onClick={() => playPauseToggle()}
-              className={classes.buttons}
-            />
-          ) : (
-            <PauseCircleFilledRoundedIcon
-              color="inherit"
-              fontSize="large"
-              onClick={() => playPauseToggle()}
-              className={classes.buttons}
-            />
-          )}
-
-          <SkipNextRoundedIcon
-            onClick={() => playNextTrack()}
-            className={classes.buttons}
+          <Slider
+            className={classes.prgbar}
+            min={0}
+            max={duration}
+            value={position}
+            onChange={changePosition}
+            aria-labelledby="continuous-slider"
           />
-          <SkipPreviousRoundedIcon
-            className={classes.buttons}
-            onClick={() => playPreviousTrack()}
-          />
+          <div>
+            {playing ? (
+              <PlayArrowRoundedIcon
+                color="inherit"
+                fontSize="large"
+                onClick={() => playPauseToggle()}
+                className={classes.buttons}
+              />
+            ) : (
+              <PauseCircleFilledRoundedIcon
+                color="inherit"
+                fontSize="large"
+                onClick={() => playPauseToggle()}
+                className={classes.buttons}
+              />
+            )}
 
+            <span>
+              <SkipNextRoundedIcon
+                onClick={() => playNextTrack()}
+                className={classes.buttons}
+              />
+            </span>
+            <span>
+              {" "}
+              <SkipPreviousRoundedIcon
+                className={classes.buttons}
+                onClick={() => playPreviousTrack()}
+              />
+            </span>
+          </div>
           <div className={classes.root}>
             <Slider
               value={volume}

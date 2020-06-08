@@ -6,7 +6,7 @@ import Player from "./components/Player";
 import MainControl from "./components/MainControl";
 function App() {
   return (
-    <div className="App">
+    <div>
       {/* <ScriptTag
         type="text/javascript"
         src="https://sdk.scdn.co/spotify-player.js"

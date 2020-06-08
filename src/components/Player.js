@@ -5,6 +5,7 @@ import { Slider } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import Image from "react-bootstrap/Image";
 import Button from "@material-ui/core/Button";
+import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 
 class Player extends Component {
   constructor(props) {
@@ -146,6 +147,7 @@ class Player extends Component {
             <button onClick={() => this.playPauseToggle()}>
               {this.state.playing ? "Pause" : "Play"}
             </button>
+
             <button onClick={() => this.playNextTrack()}>Next track</button>
             <button onClick={() => this.playPreviousTrack()}>
               Previous track
@@ -194,11 +196,13 @@ class Player extends Component {
           </div>
         ) : (
           <div>
-            <p className="App-intro">
-              Enter your Spotify access token. Get it from{" "}
+            <p>
+              <h1>hello</h1>
+              Enter your Spotify access token. Get it from
               <a href="https://beta.developer.spotify.com/documentation/web-playback-sdk/quick-start/#authenticating-with-spotify">
                 here
               </a>
+              <PlayArrowRoundedIcon color="primary" fontSize="large" />
             </p>
             <p>
               <input

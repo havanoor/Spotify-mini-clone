@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import Button from "react-bootstrap/Button";
+//import Button from "react-bootstrap/Button";
+import { Slider } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 import Image from "react-bootstrap/Image";
+import Button from "@material-ui/core/Button";
 
 class Player extends Component {
   constructor(props) {
@@ -21,18 +24,6 @@ class Player extends Component {
       image: "Image",
     };
   }
-
-  //  spotifyCheck=()=>{
-  //     window.onSpotifyWebPlaybackSDKReady = () => {
-  //         const token =
-  //           "BQDp1GdjvFWgBJkLrfCu66x8SWA_8B3tPVpHUfRI6o2b0544nsjHxh5ILU_uD0TyrMMGWs57IJ_iF6QWbK5mRYDldXB2XXHHgtPN3GA4AQjtFfk3-qLIE-NyhgEwkrDje6rL-6jgIY0-XqciKbX5McHKQXN3QsQgt-lmqfuIzbvyDYxaS8Y";
-  //         const player = new Spotify.Player({
-  //           name: "Web Playback SDK Quick Start Player",
-  //           getOAuthToken: (cb) => {
-  //             cb(token);
-  //           },
-  //         });
-  //  }
 
   playbackControls(params) {
     console.log(params.track_window.current_track);
@@ -132,6 +123,13 @@ class Player extends Component {
     // console.log("HIIII");
     // console.log(val);
   }
+  handleChange = (event, newValue) => {
+    console.log("Event");
+    console.log(event);
+    console.log("New");
+    console.log(newValue);
+    this.player.setVolume(newValue / 100);
+  };
   render() {
     const { token, loggedIn, volume } = this.state;
 
@@ -155,15 +153,31 @@ class Player extends Component {
             <p>
               <input
                 type="number"
+                min={0}
+                max={100}
                 value={volume}
                 onChange={(e) => this.setState({ volume: e.target.value })}
               />
-              <Button variant="outline-primary" onClick={() => this.getState()}>
+              <div className="test">
+                {/* <Slider
+                  value={classes.root}
+                  min={0}
+                  max={100}
+                  onChange={this.handleChange}
+                  aria-labelledby="continuous-slider"
+                /> */}
+              </div>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => this.getState()}
+              >
                 Volume
               </Button>
 
               <Button
-                variant="outline-primary"
+                variant="contained"
+                color="primary"
                 onClick={() => this.changeVolume()}
               >
                 Change Volume
@@ -185,7 +199,6 @@ class Player extends Component {
               <a href="https://beta.developer.spotify.com/documentation/web-playback-sdk/quick-start/#authenticating-with-spotify">
                 here
               </a>
-              .
             </p>
             <p>
               <input

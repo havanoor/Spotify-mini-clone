@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import ScriptTag from "react-script-tag";
 import "./App.css";
 import Player from "./components/Player";
+import MainControl from "./components/MainControl";
 function App() {
   return (
     <div className="App">
@@ -10,7 +11,8 @@ function App() {
         type="text/javascript"
         src="https://sdk.scdn.co/spotify-player.js"
       ></ScriptTag> */}
-      <Player />
+      {/* <Player /> */}
+      <MainControl />
     </div>
   );
 }

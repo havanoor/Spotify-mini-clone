@@ -2,14 +2,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import { Slider, LinearProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import { render } from "@testing-library/react";
 import PauseCircleFilledRoundedIcon from "@material-ui/icons/PauseCircleFilledRounded";
 import SkipNextRoundedIcon from "@material-ui/icons/SkipNextRounded";
 import SkipPreviousRoundedIcon from "@material-ui/icons/SkipPreviousRounded";
-
-let player, playerCheckInterval, playerposition;
+let player, playerCheckInterval, playerposition, token;
 
 const useStyles = makeStyles({
   root: {
@@ -28,15 +24,15 @@ const useStyles = makeStyles({
   },
   buttons: {
     alignItems: "center",
-    display: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
+    //display: "block",
+    //marginLeft: "auto",
+    //marginRight: "auto",
   },
 });
 
 function MainControl() {
   const classes = useStyles();
-  const [token, setToken] = useState("");
+  const [token2, setToken] = useState("");
   const [loggedIn, setloggedIn] = useState(false);
   const [deviceId, setdeviceId] = useState("");
   const [trackName, settrackName] = useState("Track Name");
@@ -46,6 +42,7 @@ function MainControl() {
   const [volume, setVolume] = useState(0);
   const [image, setImage] = useState("Image");
   const [playing, setPlaying] = useState(false);
+  const [data, setData] = useState("");
 
   const handleLogin = () => {
     if (token) {
@@ -58,6 +55,8 @@ function MainControl() {
       checkForPlayer(token);
       console.log("Tokennnnnnnnnnnnnnnnnnn");
       console.log(token);
+    } else {
+      console.log("Nop");
     }
   };
   const checkForPlayer = useCallback(
@@ -162,8 +161,8 @@ function MainControl() {
   };
   const getState = () => {
     player.getCurrentState().then((state) => {
-      console.log("inside get state");
-      console.log(state.position);
+      //   console.log("inside get state");
+      //   console.log(state.position);
       //newControl({ ...control, position: state.position });\
       setPosition(state.position);
     });
@@ -175,6 +174,39 @@ function MainControl() {
   const changePosition = (event, newValue) => {
     setPosition(newValue);
     player.seek(newValue);
+  };
+
+  const check = () => {
+    console.log("Random function");
+  };
+
+  const addToqueue = () => {
+    fetch("http://localhost:8000/data")
+      .then((response) => response.json())
+
+      .then(async (jsonD) => {
+        ///setData(jsonD.data);
+        let x = jsonD.access_token;
+        token = jsonD.access_token;
+        console.log(jsonD);
+        console.log("X=", x);
+        //await setToken(jsonD.access_token);
+        // check();
+        setToken(x);
+        handleLogin();
+        //console.log(
+        //("77777777777777777777777777777777777777777777777777777777777777777");
+        // );
+        console.log("Token=", token2);
+        // console.log("X=", x);
+        //console.log(data, "inside");
+      });
+
+    // setTimeout(() => {
+    //   console.log("Bjassjk");
+    //   console.log(token, "Kya hai ye");
+    //   console.log();
+    // }, 5000);
   };
 
   return (
@@ -203,7 +235,12 @@ function MainControl() {
             onChange={changePosition}
             aria-labelledby="continuous-slider"
           />
-          <div>
+          <div className="container">
+            <SkipPreviousRoundedIcon
+              className={classes.buttons}
+              onClick={() => playPreviousTrack()}
+              fontSize="large"
+            />
             {playing ? (
               <PlayArrowRoundedIcon
                 color="inherit"
@@ -219,20 +256,11 @@ function MainControl() {
                 className={classes.buttons}
               />
             )}
-
-            <span>
-              <SkipNextRoundedIcon
-                onClick={() => playNextTrack()}
-                className={classes.buttons}
-              />
-            </span>
-            <span>
-              {" "}
-              <SkipPreviousRoundedIcon
-                className={classes.buttons}
-                onClick={() => playPreviousTrack()}
-              />
-            </span>
+            <SkipNextRoundedIcon
+              onClick={() => playNextTrack()}
+              className={classes.buttons}
+              fontSize="large"
+            />{" "}
           </div>
           <div className={classes.root}>
             <Slider
@@ -243,8 +271,6 @@ function MainControl() {
               aria-labelledby="continuous-slider"
             />
           </div>
-
-          <div className="test"></div>
         </div>
       ) : (
         <div>
@@ -267,6 +293,9 @@ function MainControl() {
           <p>
             <button onClick={() => handleLogin(token)}>Go</button>
           </p>
+          <div className="test">
+            <button onClick={() => addToqueue()}> Click</button>
+          </div>
         </div>
       )}
     </div>

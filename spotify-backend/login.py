@@ -6,7 +6,7 @@ import time
 from fastapi.responses import RedirectResponse, JSONResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
 from config import client_id, Authorization_key, scopes
-
+from selenium import webdriver
 value = ""
 origins = [
     "http://localhost:3000/login",
@@ -28,50 +28,59 @@ app.add_middleware(
 
 @app.get("/login")
 def login_user():
-
+    driver =webdriver.Firefox()
     print("In login function")
-    val = webbrowser.open(
+    val = driver.get(
         "https://accounts.spotify.com/authorize"
         + "?response_type=code"
         + "&client_id="
         + client_id
         + "&scope="
         + scopes
-        + "&redirect_uri=http://localhost:8000/logged",
+        + "&redirect_uri=http://localhost:8000/logged"
+        + "&login_dialog=true"
     )
 
     print(val, "IN LOGIN")
 
-    # return {"hi": "hihihihihihi"}
+    return {"hi": "hihihihihihi"}
 
 
 @app.get("/logged")
 def logged_in(code: str = None, state: str = ""):
     print("hi", code)
     print("hi2", state)
-    if code:
+    if code is None:
+        print("Not logged in")
+        login_user()
+    
+    else:
         header = {"Authorization": f"Basic {Authorization_key}"}
         url = "https://accounts.spotify.com/api/token"
         data = {
-            "grant_type": "authorization_code",
-            "code": code,
-            "redirect_uri": "http://localhost:8000/logged",
-        }
+                "grant_type": "authorization_code",
+                "code": code,
+                "redirect_uri": "http://localhost:8000/logged",
+            }
         val = requests.post(url, data=data, headers=header)
 
         print("++++++++++++++++++++++++++++++++++++++++")
         pprint(val.json())
         globals()["value"] = val.json()
-        # return RedirectResponse("http://localhost:3000")
+            # return RedirectResponse("http://localhost:3000")
         return JSONResponse(val.json())
-    else:
-        login_user()
+        # else:
+            # login_user()
 
 
 @app.get("/data")
 def get_data():
 
-    print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-    print(logged_in())
-    time.sleep(2)
+    # print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+    logged_in()
+    while (globals()["value"]==""):
+        print("not yet")
+    
     return value
+
+ 

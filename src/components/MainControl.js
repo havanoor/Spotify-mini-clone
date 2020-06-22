@@ -210,7 +210,7 @@ function MainControl() {
   };
 
   return (
-    <div className="main">
+    <div className="main"> 
       {loggedIn ? (
         <div className="main">
           <img src={image} className="myimg" />

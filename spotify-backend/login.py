@@ -83,4 +83,26 @@ def get_data():
     
     return value
 
- 
+@app.get("/recentlyplayed")
+def get_recently():
+    details=[]
+    header={"Authorization":"Bearer BQDXZ8aE9FvYMR30sIUyE6uj8L4K1K46f3kszx64hnJcKfEmFcF_UQ4mRbQlf5AmiD1yYtUiCTPQWTaVidQAUGH3QsRlwqmmjbpH4RFQAnyjAWWeNsGRgA-v708fBcW0HsPKYnfwrt_T0bxFHojLM3XeJDsG6lxHKYw1qeFT9CBQiWGLDrp4GxIXXf0"}
+    url='https://api.spotify.com/v1/me/tracks'
+    val=requests.get(url,headers=header)
+
+    for i in val.json()['items']:
+        indi={
+            "trackname":i['track']['name'],
+            "artists":i['track']['artists'],
+            "images":{  'small':i['track']['album']['images'][2]['url'],
+                        'medium':i['track']['album']['images'][1]['url'],
+                        'large':i['track']['album']['images'][0]['url']}
+                        
+
+
+        }
+        details.append(indi)
+
+
+
+    return details

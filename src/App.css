@@ -34,10 +34,10 @@
   align-content: center;
 }
 
-* {
+/* * {
   background-color: #030f2e;
   color: white;
-}
+} */
 
 .container {
   display: flex;

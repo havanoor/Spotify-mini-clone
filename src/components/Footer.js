@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import PauseCircleFilledRoundedIcon from "@material-ui/icons/PauseCircleFilledRounded";
 import SkipNextRoundedIcon from "@material-ui/icons/SkipNextRounded";
 import SkipPreviousRoundedIcon from "@material-ui/icons/SkipPreviousRounded";
+import {SongContext} from './SongContext';
 
 
 const useStyles = makeStyles({
@@ -37,6 +38,9 @@ export default function Footer() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+
+  const { artist,dura,pos,vol,imag,play,device,track  } = React.useContext(SongContext);
+  const [image, setImage] = imag;
 
   
 
@@ -89,6 +93,7 @@ export default function Footer() {
 
                       
                       <SkipNextRoundedIcon />
+                      <img src={image} alt="lfhlkdshfjlkdfhlkdf" />
 
                     </Paper>
                     

@@ -86,7 +86,7 @@ def get_data():
 @app.get("/recentlyplayed")
 def get_recently():
     details=[]
-    header={"Authorization":"Bearer BQDDxeDd3uJY4x8Sg46FKQU6arSNuKGWbIoxuJVGAm9FXHELE136psIvojHHhfxrEkjTy7QvyeIOAHHJLkkP7Htbg4bbJsn4aZ6_7iTI0JuaFldWVuvHXgVz1XuYecWbf7SIzmK72thqAn9nch-a8zo47PMwWLc8_p2GefmbkZLebYi2gZPwAjex_dY"}
+    header={"Authorization":"Bearer BQBEVPWmAYocUQp2Bb_JksMXna3XWT2dVtYqHGu3msxa34doMK07PotzRrll2Vn3GljjDH2KgsD3VIG4dEEiEeSQ71beLAdLikIvC4rmMwZcSAtNfz726YwN2qDLTfqBMy5qY7a17YouvyuhPqDnk6v2sCuhsI9qYKHPTVSHdwSWls-Lt6y8JgpnSI8"}
     url='https://api.spotify.com/v1/me/tracks'
     val=requests.get(url,headers=header)
 

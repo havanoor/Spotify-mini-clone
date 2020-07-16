@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import {SongContext} from './SongContext';
 let token, playerCheckInterval,player,playerposition;
 
 const useStyles = makeStyles((theme) => ({
@@ -33,16 +34,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
+  const { artist,dura,pos,vol,imag,play,device,track  } = React.useContext(SongContext);
   const [token2, setToken] = useState("");
   const [loggedIn, setloggedIn] = useState(false);
-  const [artistName, setartistName] = useState("Artist Name");
-  const [duration, setDuration] = useState(0);
-  const [position, setPosition] = useState(0);
-  const [volume, setVolume] = useState(0);
-  const [image, setImage] = useState("Image");
-  const [playing, setPlaying] = useState(false);
-  const [deviceId, setdeviceId] = useState("");
-  const [trackName, settrackName] = useState("Track Name");
+  const [artistName, setartistName] = artist;
+  const [duration, setDuration] = dura;
+  const [position, setPosition] = pos;
+  const [volume, setVolume] = vol;
+  const [image, setImage] = imag;
+  const [playing, setPlaying] = play
+  const [deviceId, setdeviceId] = device
+  const [trackName, settrackName] =track;
 
 
 

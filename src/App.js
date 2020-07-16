@@ -6,9 +6,11 @@ import Player from "./components/Player";
 import MainControl from "./components/MainControl";
 import HomePage from "./components/HomePage";
 import NavBar from './components/NavBar';
+import {SongProvider} from './components/SongContext'
 
 function App() {
   return (
+    <SongProvider >
     <div>
       {/* <ScriptTag
         type="text/javascript"
@@ -20,6 +22,7 @@ function App() {
       <HomePage />
       {/* <NavBar /> */}
     </div>
+    </SongProvider>
   );
 }
 

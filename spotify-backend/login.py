@@ -28,9 +28,9 @@ app.add_middleware(
 
 @app.get("/login")
 def login_user():
-    driver =webdriver.Firefox()
+    #driver =webdriver.Firefox()
     print("In login function")
-    val = driver.get(
+    val = webbrowser.open(
         "https://accounts.spotify.com/authorize"
         + "?response_type=code"
         + "&client_id="
@@ -86,7 +86,7 @@ def get_data():
 @app.get("/recentlyplayed")
 def get_recently():
     details=[]
-    header={"Authorization":"Bearer BQDXZ8aE9FvYMR30sIUyE6uj8L4K1K46f3kszx64hnJcKfEmFcF_UQ4mRbQlf5AmiD1yYtUiCTPQWTaVidQAUGH3QsRlwqmmjbpH4RFQAnyjAWWeNsGRgA-v708fBcW0HsPKYnfwrt_T0bxFHojLM3XeJDsG6lxHKYw1qeFT9CBQiWGLDrp4GxIXXf0"}
+    header={"Authorization":"Bearer BQDDxeDd3uJY4x8Sg46FKQU6arSNuKGWbIoxuJVGAm9FXHELE136psIvojHHhfxrEkjTy7QvyeIOAHHJLkkP7Htbg4bbJsn4aZ6_7iTI0JuaFldWVuvHXgVz1XuYecWbf7SIzmK72thqAn9nch-a8zo47PMwWLc8_p2GefmbkZLebYi2gZPwAjex_dY"}
     url='https://api.spotify.com/v1/me/tracks'
     val=requests.get(url,headers=header)
 

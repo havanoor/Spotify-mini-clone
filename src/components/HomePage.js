@@ -4,9 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AppBar from '@material-ui/core/AppBar';
@@ -22,6 +19,24 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import DevicesOtherIcon from '@material-ui/icons/DevicesOther';
+import Popover from '@material-ui/core/Popover';
+import './MainControl'
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import MainControl from './MainControl';
+import PauseCircleFilledRoundedIcon from "@material-ui/icons/PauseCircleFilledRounded";
+import SkipNextRoundedIcon from "@material-ui/icons/SkipNextRounded";
+import SkipPreviousRoundedIcon from "@material-ui/icons/SkipPreviousRounded";
+import Footer from './Footer'
+import NavBar from './NavBar'
+
+
 const drawerWidth = 200;
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,26 +50,9 @@ const useStyles = makeStyles((theme) => ({
     }, menuButton: {
         marginRight: theme.spacing(2),
       },
-      appbar:{zIndex: theme.zIndex.drawer + 1},
-      
-      paperdata:{
-           width:300,
-           height:400
-           
-      },drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-      },
-      drawerPaper: {
-        width: drawerWidth,
-      },
-      drawerContainer: {
-        overflow: 'auto',
-      },
-      content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
-      },
+      drawer:{
+        zIndex:-1
+      }
       
   }));
   
@@ -66,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
     const [data,setData]=useState([])
     const [start,setStart]=useState(0)
     const [end,setEnd]=useState(4)
+    const [anchorEl, setAnchorEl] = useState(null);
     let valioo;
 
     useEffect(()=>{
@@ -117,23 +116,25 @@ const useStyles = makeStyles((theme) => ({
       
     }
 
+    
+  
+      // setTimeout(() => {
+      //   console.log("Bjassjk");
+      //   console.log(token, "Kya hai ye");
+      //   console.log();
+      // }, 5000);
+    
+  
 
+    
 
     return(
         <div >
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-            <AppBar position="fixed" color='primary' className={classes.appbar}>
-  <Toolbar>
-    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-      <MenuIcon />
-    </IconButton>
-    <Typography variant="h6" className={classes.title}>
-      News
-    </Typography>
-    <Button>Login</Button>
-  </Toolbar>
-</AppBar>
+            <NavBar />
+
+            
 </Grid>
 <Grid item xs={2}>
 <Drawer
@@ -167,16 +168,16 @@ const useStyles = makeStyles((theme) => ({
       </Drawer>
       </Grid>
       <Grid item xs={10}>
-      <Grid item xs={10}>
-        <Toolbar />
-              <b color="red">Recently PLayed</b>
-              <KeyboardArrowLeftIcon  onClick={()=>previousFour()} />
-              <KeyboardArrowRightIcon onClick={()=>nextFour()} />
-              <Divider />  
-            </Grid>
-                <Grid container>
+            <Grid item xs={10}>
+                <Toolbar />
+                <b color="red">Recently PLayed</b>
+                <KeyboardArrowLeftIcon  onClick={()=>previousFour()} />
+                <KeyboardArrowRightIcon onClick={()=>nextFour()} />
+                <Divider />  
+              </Grid>
+                <Grid container spacing={2}>
                 
-          {data.slice(start,end).map((value) => (
+              {data.slice(start,end).map((value) => (
               <Grid item xs={3}>
                 <div>  
                     
@@ -190,12 +191,13 @@ const useStyles = makeStyles((theme) => ({
                  </Grid>
                 
 
-          ))}
+            ))}
                 </Grid>
                
          
           </Grid>
           </Grid>
+            <Footer />
         </div>
 
     )

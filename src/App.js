@@ -5,6 +5,8 @@ import "./App.css";
 import Player from "./components/Player";
 import MainControl from "./components/MainControl";
 import HomePage from "./components/HomePage";
+import NavBar from './components/NavBar';
+
 function App() {
   return (
     <div>
@@ -14,7 +16,9 @@ function App() {
       ></ScriptTag> */}
       {/* <Player /> */}
       {/* <MainControl /> */}
+
       <HomePage />
+      {/* <NavBar /> */}
     </div>
   );
 }

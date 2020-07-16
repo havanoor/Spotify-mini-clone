@@ -145,6 +145,9 @@ function MainControl() {
     // this.playerposition = setInterval(() => this.getState(), 1000);
   };
 
+  const getCurrentTrack=()=>{
+    return {image}
+  }
   const playNextTrack = () => {
     player.nextTrack();
   };
@@ -180,14 +183,14 @@ function MainControl() {
     console.log("Random function");
   };
 
-  const addToqueue = () => {
+   const LoginNow = () => {
     fetch("http://localhost:8000/data")
       .then((response) => response.json())
 
       .then(async (jsonD) => {
         ///setData(jsonD.data);
         let x = jsonD.access_token;
-        token = jsonD.access_token;
+        token = jsonD.access_token; 
         console.log(jsonD);
         console.log("X=", x);
         //await setToken(jsonD.access_token);
@@ -294,7 +297,7 @@ function MainControl() {
             <button onClick={() => handleLogin(token)}>Go</button>
           </p>
           <div className="test">
-            <button onClick={() => addToqueue()}> Click</button>
+            <button onClick={() => LoginNow()}> Click</button>
           </div>
         </div>
       )}

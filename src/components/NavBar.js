@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
-  const { artist,dura,pos,vol,imag,play,device,track  } = React.useContext(SongContext);
+  const { artist,dura,pos,vol,imag,play,device,track,player2  } = React.useContext(SongContext);
   const [token2, setToken] = useState("");
   const [loggedIn, setloggedIn] = useState(false);
   const [artistName, setartistName] = artist;
@@ -45,6 +45,7 @@ export default function ButtonAppBar() {
   const [playing, setPlaying] = play
   const [deviceId, setdeviceId] = device
   const [trackName, settrackName] =track;
+  const [temp,setTemp]=player2;
 
 
 
@@ -104,6 +105,7 @@ export default function ButtonAppBar() {
             cb(value);
           },
         });
+        setTemp(player);
 
         createEventHandlers();
         player.connect();

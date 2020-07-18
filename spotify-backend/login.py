@@ -83,10 +83,10 @@ def get_data():
     
     return value
 
-@app.get("/recentlyplayed")
-def get_recently():
+@app.get("/likedsongs")
+def get_liked():
     details=[]
-    header={"Authorization":"Bearer BQBEVPWmAYocUQp2Bb_JksMXna3XWT2dVtYqHGu3msxa34doMK07PotzRrll2Vn3GljjDH2KgsD3VIG4dEEiEeSQ71beLAdLikIvC4rmMwZcSAtNfz726YwN2qDLTfqBMy5qY7a17YouvyuhPqDnk6v2sCuhsI9qYKHPTVSHdwSWls-Lt6y8JgpnSI8"}
+    header={"Authorization":"Bearer BQCoN23_ytllAid7sWPqjrncrJGExz2d7aE6VFpm-ox8vpYpTWdVqkPuvGYGuLaS6Wu2TNwXzmaOFBxnYHm02g9Od21L4N8BEaZUwlx92rOZYb6-nMbsRrteTY7PgL-WqE875bPJ38pRBkaRRI4vXYdTtcMbsZpQkxKePVF8PgKTP7p4tXYmSZkTVCM"}
     url='https://api.spotify.com/v1/me/tracks'
     val=requests.get(url,headers=header)
 
@@ -102,6 +102,31 @@ def get_recently():
 
         }
         details.append(indi)
+
+
+
+    return details
+
+@app.get('/recentlyplayed')
+def get_recently():
+    details=[]
+    header={"Authorization":"Bearer BQCoN23_ytllAid7sWPqjrncrJGExz2d7aE6VFpm-ox8vpYpTWdVqkPuvGYGuLaS6Wu2TNwXzmaOFBxnYHm02g9Od21L4N8BEaZUwlx92rOZYb6-nMbsRrteTY7PgL-WqE875bPJ38pRBkaRRI4vXYdTtcMbsZpQkxKePVF8PgKTP7p4tXYmSZkTVCM"}
+    url='https://api.spotify.com/v1/me/player/recently-played'
+    val=requests.get(url,headers=header)
+
+    for i in val.json()['items']:
+        print(i['track']['name'])
+        data={
+            "images":{  'small':i['track']['album']['images'][2]['url'],
+                        'medium':i['track']['album']['images'][1]['url'],
+                        'large':i['track']['album']['images'][0]['url']},
+            "trackname":i['track']['name'],
+            "artists":i['track']['artists'],
+
+                        
+        }
+
+        details.append(data)
 
 
 

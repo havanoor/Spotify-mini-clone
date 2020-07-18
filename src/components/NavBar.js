@@ -12,6 +12,9 @@ let token, playerCheckInterval,player,playerposition;
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor:"yellow",
+    height:"100px"
+    
     
     
   },
@@ -25,8 +28,9 @@ const useStyles = makeStyles((theme) => ({
   },
   
   temp:{
-      zIndex: +5,
+      
       zIndex: theme.zIndex.drawer + 1,
+      backgroundColor:"#0d7377"
   }
 }));
 
@@ -120,7 +124,7 @@ export default function ButtonAppBar() {
         settrackName(params.track_window.current_track.name);
         setartistName(params.track_window.current_track.artists[0].name);
         setDuration(params.duration);
-        setImage(params.track_window.current_track.album.images[0].url);
+        setImage(params.track_window.current_track.album.images);
         setPlaying(params.paused);
         console.log("Poda");
         console.log(playing);
@@ -183,7 +187,7 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="sticky" className={classes.temp}>
+      <AppBar position="fixed" className={classes.temp}>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />

@@ -5,6 +5,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
 import {useState,useEffect} from 'react';
 import Popover from '@material-ui/core/Popover';
 import Paper from '@material-ui/core/Paper';
@@ -13,24 +14,38 @@ import PauseCircleFilledRoundedIcon from "@material-ui/icons/PauseCircleFilledRo
 import SkipNextRoundedIcon from "@material-ui/icons/SkipNextRounded";
 import SkipPreviousRoundedIcon from "@material-ui/icons/SkipPreviousRounded";
 import {SongContext} from './SongContext';
+import { Slider, LinearProgress } from "@material-ui/core";
 
 
 
 const useStyles = makeStyles((theme)=>({
   root: {
     
-    backgroundColor:"blue",
-    position:"absolute",
+    backgroundColor:"#323232",
+    
     bottom:"0px",
     width:"100%",
     // marginLeft:"160px",
     zIndex: theme.zIndex.drawer + 1,
+    bottom: 0,
+    position:"fixed",
     
+    
+    
+  },
+  prgbar: {
+    width: 300,
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+    color:"white"
   },
   poppy:{
     width:"500px",
-    marginBottom:"200px",
-    height:"500px"
+    // marginBottom:"200px",
+    height:"730px",
+    backgroundColor:"#323232",
+
     
   },
   imag:{
@@ -40,10 +55,40 @@ const useStyles = makeStyles((theme)=>({
     display:"flex"
 
   },
+  Navimg:{
+    marginLeft:"10px",
+    position:"absolute",
+    marginLeft:0,
+    marginRight:"auto",
+    float:"left"
+  },
   buttons: {
     display:"inline",
+    fill:"white",
+    color:"white"
    
      },
+     temp:{
+      height:"100px",
+     
+      
+     },
+     slid:{
+      width: 200,
+      //position: "relative",
+      display: "block",
+      marginLeft: "auto",
+      marginRight: "auto",
+      //left: 700,
+    },
+    new:{
+      marginRight:"auto",
+    },
+    new2:{
+      marginLeft:"auto",
+      color:"white"
+    }
+
 }));
 
 export default function Footer() {
@@ -57,12 +102,16 @@ export default function Footer() {
   const [image, setImage] = imag;
   const [playing, setPlaying] = play;
   const [artistName, setartistName] = artist;
+  const [volume, setVolume] = vol;
+  const [duration, setDuration] = dura;
+  const [position, setPosition] = pos;
+
   
   const [trackName, settrackName] =track;
   const [temp,setTemp]=player2;
 
   
-
+  const transform = (val) => (val * 100) / duration;
   const handlePopper=(event)=>{
     setAnchorEl(event.currentTarget)
 
@@ -86,11 +135,20 @@ const playPauseToggle = () => {
     // this.playerposition = setInterval(() => this.getState(), 1000);
   };
 
+  const handleChange = (event, newValue) => {
+    setVolume(newValue);
+    temp.setVolume(newValue / 100);
+  };
+  const changePosition = (event, newValue) => {
+    setPosition(newValue);
+    temp.seek(newValue);
+  };
 
 
 
 
   return (
+    <div className={classes.temp}>
     <BottomNavigation
       value={value}
       onChange={(event, newValue) => {
@@ -99,9 +157,49 @@ const playPauseToggle = () => {
       showLabels
       className={classes.root}
     >
-      <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-      <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-      <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} onClick={handlePopper} />
+      
+      <BottomNavigationAction className={classes.new} icon={<img src={image[1].url} alt="Not Playing"  />} />
+      <BottomNavigationAction style={{color:"white"}} label="Previous"  icon={<SkipPreviousRoundedIcon
+                      className={classes.buttons}
+                      onClick={() => playPreviousTrack()}
+                      fontSize="large"
+                       />} />
+      <BottomNavigationAction style={{color:"white"}}  label={playing?("Play"):("Pause")} icon={playing ? (
+              <PlayArrowRoundedIcon
+                color="inherit"
+                fontSize="large"
+                onClick={() => playPauseToggle()}
+                className={classes.buttons}
+              />
+            ) : (
+              <PauseCircleFilledRoundedIcon
+                color="inherit"
+                fontSize="large"
+                onClick={() => playPauseToggle()}
+                className={classes.buttons}
+              />
+            )}
+            
+            />
+      
+      <BottomNavigationAction style={{color:"white"}} label="Next" icon={<SkipNextRoundedIcon 
+                      onClick={() => playNextTrack()}
+                      className={classes.buttons}
+                      fontSize="large"
+                      
+                      />
+
+} />  
+
+      <BottomNavigationAction   icon={<Slider
+            className={classes.prgbar}
+            min={0}
+            max={duration}
+            value={position}
+            onChange={changePosition}
+            aria-labelledby="continuous-slider"
+          />} />
+      <BottomNavigationAction className={classes.new2} label="Nearby" icon={<LibraryMusicIcon className={classes.buttons} />} onClick={handlePopper} />
       <Popover id={id}
                     open={open}
                     anchorEl={anchorEl}
@@ -126,9 +224,22 @@ const playPauseToggle = () => {
 
                       
                       
-                      <img src={image} alt="lfhlkdshfjlkdfhlkdf" className={classes.imag} />
+                      <img src={image[0].url} alt="Not Playing" className={classes.imag} />
                       <h1 className="trackname">{trackName}</h1>
                       <h1 className="artistname">{artistName}</h1>
+                      <LinearProgress
+            variant="determinate"
+            className={classes.prgbar}
+            value={transform(position)}
+          />
+          <Slider
+            className={classes.prgbar}
+            min={0}
+            max={duration}
+            value={position}
+            onChange={changePosition}
+            aria-labelledby="continuous-slider"
+          />
 
                       <SkipPreviousRoundedIcon
                       className={classes.buttons}
@@ -155,6 +266,23 @@ const playPauseToggle = () => {
                       className={classes.buttons}
                       fontSize="large"
                       />
+
+            <div className={classes.slid}>
+              
+                        <Slider
+                          value={volume}
+                          min={0}
+                          max={100}
+                          onChange={handleChange}
+                          aria-labelledby="continuous-slider"
+                        />
+                      </div>
+   
+
+
+
+
+
                     </Paper>
                     
 
@@ -164,5 +292,6 @@ const playPauseToggle = () => {
                     </Popover>
 
     </BottomNavigation>
+    </div>
   );
 }

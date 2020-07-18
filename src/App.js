@@ -6,6 +6,7 @@ import Player from "./components/Player";
 import MainControl from "./components/MainControl";
 import HomePage from "./components/HomePage";
 import NavBar from './components/NavBar';
+import SideDrawer from './components/SideDrawer'
 import {SongProvider} from './components/SongContext'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
 
       <HomePage />
       {/* <NavBar /> */}
+      {/* <SideDrawer /> */}
     </div>
     </SongProvider>
   );

@@ -35,6 +35,7 @@ import SkipNextRoundedIcon from "@material-ui/icons/SkipNextRounded";
 import SkipPreviousRoundedIcon from "@material-ui/icons/SkipPreviousRounded";
 import Footer from './Footer'
 import NavBar from './NavBar'
+import SideDrawer from './SideDrawer'
 
 
 const drawerWidth = 200;
@@ -51,8 +52,23 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
       },
       drawer:{
-        zIndex:-1
+       
+        width:"200px"
+
+      },
+      drawerContainer:{
+        backgroundColor:"#212121",
+        color:"white"
+
+      },
+      paperdata:{
+        backgroundColor:"#212121",
+        
+        color:"white",
+        width:"310px",
+        display:"inlineBlock"
       }
+
       
   }));
   
@@ -62,27 +78,40 @@ const useStyles = makeStyles((theme) => ({
     const classes = useStyles();
    
     const [data,setData]=useState([])
+    const [play,setrecentPlay]=useState([])
     const [start,setStart]=useState(0)
     const [end,setEnd]=useState(4)
-    const [anchorEl, setAnchorEl] = useState(null);
-    let valioo;
+    
+    let likedSongs,recentlyPlayed;
 
     useEffect(()=>{
 
-        const getRecentlyPlayed=()=>{
-            fetch('http://localhost:8000/recentlyplayed')
+        const getLikedSongs=()=>{
+            fetch('http://localhost:8000/likedsongs')
             .then(response=>response.json())
             .then(val=>{
                 setData(val)
                 console.log(val)
-                valioo=val;
+                likedSongs=val;
             }
 
-            ).then(done=>console.log("val",valioo))
+            ).then(done=>console.log("val",likedSongs))
         }
+        const getRecentlyPlayed=()=>{
+          fetch('http://localhost:8000/recentlyplayed')
+          .then(response=>response.json())
+          .then(val=>{
+              setrecentPlay(val)
+              console.log(val)
+              recentlyPlayed=val;
+          }
+
+          ).then(done=>console.log("val",recentlyPlayed))
+      }
 
         getRecentlyPlayed()
-        console.log(valioo,"hiiiiii")
+        getLikedSongs()
+        console.log(recentlyPlayed,"hiiiiii")
 
     },[])
 
@@ -130,74 +159,85 @@ const useStyles = makeStyles((theme) => ({
 
     return(
         <div >
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
+           
             <NavBar />
+            <Grid container spacing={1}>
 
             
-</Grid>
-<Grid item xs={2}>
-<Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-            paper: classes.drawerPaper,
-          }}
-        
-      >
-        <Toolbar />
-          <div className={classes.drawerContainer}>
-          <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-        </div>
-      </Drawer>
+            <Grid item xs={2}>
+      <SideDrawer />
       </Grid>
+     
+
       <Grid item xs={10}>
-            <Grid item xs={10}>
-                <Toolbar />
+                
+
                 <b color="red">Recently PLayed</b>
                 <KeyboardArrowLeftIcon  onClick={()=>previousFour()} />
                 <KeyboardArrowRightIcon onClick={()=>nextFour()} />
                 <Divider />  
-              </Grid>
-                <Grid container spacing={2}>
+              
+                <Grid container spacing={1}>
                 
-              {data.slice(start,end).map((value) => (
-              <Grid item xs={3}>
-                <div>  
+              {play.slice(start,end).map((value) => (
+                
+                <Grid item xs={3}>
+                
                     
-                    <Paper elevation={3} className={classes.paperdata} >
+                    <Paper elevation={0} className={classes.paperdata} >
                     <img src={value.images.medium} className="myimg" />
                     <Typography align="center">{value.trackname}</Typography>
 
                         </Paper>
+
+                        </Grid>
                                          
-                </div>
-                 </Grid>
+                
+                 
                 
 
             ))}
-                </Grid>
-               
-         
-          </Grid>
-          </Grid>
-            <Footer />
+
+            </Grid>
+            <Toolbar />
+
+            <b color="red">Liked Songs</b>
+                <KeyboardArrowLeftIcon  onClick={()=>previousFour()} />
+                <KeyboardArrowRightIcon onClick={()=>nextFour()} />
+                <Divider />  
+              
+                <Grid container spacing={1}>
+                
+              {data.slice(start,end).map((value) => (
+                
+                <Grid item xs={3}>
+                
+                    
+                    <Paper elevation={0} className={classes.paperdata} >
+                    <img src={value.images.medium} className="myimg" />
+                    <Typography align="center">{value.trackname}</Typography>
+
+                        </Paper>
+
+                        </Grid>
+                                         
+                
+                 
+                
+
+            ))}
+
+            </Grid>
+
+            
+        </Grid>
+        
+
+
+
+
+        </Grid>
+        <Footer />
         </div>
 
     )

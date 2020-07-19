@@ -6,8 +6,8 @@ import time
 from fastapi.responses import RedirectResponse, JSONResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
 from config import client_id, Authorization_key, scopes
-from selenium import webdriver
-value = ""
+import threading
+value = {}
 origins = [
     "http://localhost:3000/login",
     "http://localhost:3000/logged",
@@ -66,7 +66,8 @@ def logged_in(code: str = None, state: str = ""):
 
         print("++++++++++++++++++++++++++++++++++++++++")
         pprint(val.json())
-        globals()["value"] = val.json()
+        global value
+        value= val.json()
             # return RedirectResponse("http://localhost:3000")
         return JSONResponse(val.json())
         # else:
@@ -78,7 +79,8 @@ def get_data():
 
     # print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
     logged_in()
-    while (globals()["value"]==""):
+    global value
+    while (value==""):
         print("not yet")
     
     return value
@@ -86,7 +88,9 @@ def get_data():
 @app.get("/likedsongs")
 def get_liked():
     details=[]
-    header={"Authorization":"Bearer BQCoN23_ytllAid7sWPqjrncrJGExz2d7aE6VFpm-ox8vpYpTWdVqkPuvGYGuLaS6Wu2TNwXzmaOFBxnYHm02g9Od21L4N8BEaZUwlx92rOZYb6-nMbsRrteTY7PgL-WqE875bPJ38pRBkaRRI4vXYdTtcMbsZpQkxKePVF8PgKTP7p4tXYmSZkTVCM"}
+    #print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&",f"Bearer { globals()['value']['access_token'] }")
+    print("slkjhdlksjdklsjdlkjdlksjdlkd",globals()['value'])
+    header={"Authorization":f"Bearer { value['access_token'] }"}
     url='https://api.spotify.com/v1/me/tracks'
     val=requests.get(url,headers=header)
 
@@ -110,7 +114,8 @@ def get_liked():
 @app.get('/recentlyplayed')
 def get_recently():
     details=[]
-    header={"Authorization":"Bearer BQCoN23_ytllAid7sWPqjrncrJGExz2d7aE6VFpm-ox8vpYpTWdVqkPuvGYGuLaS6Wu2TNwXzmaOFBxnYHm02g9Od21L4N8BEaZUwlx92rOZYb6-nMbsRrteTY7PgL-WqE875bPJ38pRBkaRRI4vXYdTtcMbsZpQkxKePVF8PgKTP7p4tXYmSZkTVCM"}
+    global value
+    header={"Authorization": f"Bearer {value['access_token']}"}
     url='https://api.spotify.com/v1/me/player/recently-played'
     val=requests.get(url,headers=header)
 
@@ -131,3 +136,29 @@ def get_recently():
 
 
     return details
+
+
+@app.get('/refreshToken')
+def refresh_token():
+    global value
+    threading.Timer(3600.0, test).start() 
+    header = {"Authorization": f"Basic {Authorization_key}"}
+    url = "https://accounts.spotify.com/api/token"
+    data = {
+                "grant_type": "refresh_token",
+                "refresh_token":value['refresh_token'] ,
+                "client_id": client_id,
+            }
+    val = requests.post(url, data=data, headers=header)
+
+    print("++++++++++++++++++++++++++++++++++++++++")
+    pprint(val.json())
+    value=val.json()
+    return value
+
+@app.get('/test')
+def lol():
+    threading.Timer(60.0, lol).start() 
+    print("hi")
+
+    

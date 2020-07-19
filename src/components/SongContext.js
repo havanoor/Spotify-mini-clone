@@ -21,6 +21,8 @@ export const SongProvider =(props)=>{
   const [deviceId, setdeviceId] = useState("");
   const [trackName, settrackName] = useState("Track Name");
   const [player,setPlayer]=useState("")
+  const [rplayed,setRecently]=useState([])
+  const [liked,setLiked]=useState([])
   // let token, playerCheckInterval,player,playerposition;
   // let player;
 
@@ -35,12 +37,14 @@ export const SongProvider =(props)=>{
                             pos:[position, setPosition] ,
                             vol:[volume, setVolume],
                             imag:[image, setImage],
-                            play:[playing, setPlaying],
+                            playStatus:[playing, setPlaying],
                             device:[deviceId, setdeviceId],
                             track:[trackName, settrackName],
                             // tok:token,
                             // playCheck:playerCheckInterval,
                             player2:[player,setPlayer],
+                            Liked:[liked,setLiked],
+                            Recent:[rplayed,setRecently]
                             // playerpos:playerposition 
                           }}
                                                  

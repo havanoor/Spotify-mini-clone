@@ -1,44 +1,19 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import DevicesOtherIcon from '@material-ui/icons/DevicesOther';
-import Popover from '@material-ui/core/Popover';
-import './MainControl'
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import MainControl from './MainControl';
-import PauseCircleFilledRoundedIcon from "@material-ui/icons/PauseCircleFilledRounded";
-import SkipNextRoundedIcon from "@material-ui/icons/SkipNextRounded";
-import SkipPreviousRoundedIcon from "@material-ui/icons/SkipPreviousRounded";
 import Footer from './Footer'
 import NavBar from './NavBar'
 import SideDrawer from './SideDrawer'
+import {SongContext} from './SongContext';
 
 
-const drawerWidth = 200;
+
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -76,9 +51,10 @@ const useStyles = makeStyles((theme) => ({
 
   function HomePage(){
     const classes = useStyles();
+    const {Recent,Liked}=useContext(SongContext)
    
-    const [data,setData]=useState([])
-    const [play,setrecentPlay]=useState([])
+    const [data,setData]=Liked
+    const [play,setrecentPlay]=Recent
     const [start,setStart]=useState(0)
     const [end,setEnd]=useState(4)
     
@@ -91,22 +67,22 @@ const useStyles = makeStyles((theme) => ({
             .then(response=>response.json())
             .then(val=>{
                 setData(val)
-                console.log(val)
+                // console.log(val)
                 likedSongs=val;
             }
 
-            ).then(done=>console.log("val",likedSongs))
+            )
         }
         const getRecentlyPlayed=()=>{
           fetch('http://localhost:8000/recentlyplayed')
           .then(response=>response.json())
           .then(val=>{
               setrecentPlay(val)
-              console.log(val)
+              // console.log(val)
               recentlyPlayed=val;
           }
 
-          ).then(done=>console.log("val",recentlyPlayed))
+          )
       }
 
         getRecentlyPlayed()

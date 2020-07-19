@@ -5,14 +5,14 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import {SongContext} from './SongContext';
+import RadioIcon from '@material-ui/icons/Radio';
 let token, playerCheckInterval,player,playerposition;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor:"yellow",
+    // backgroundColor:"yellow",
     height:"100px"
     
     
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
-  const { artist,dura,pos,vol,imag,play,device,track,player2  } = React.useContext(SongContext);
+  const { artist,dura,pos,vol,imag,playStatus,device,track,player2,Liked,Recent  } = useContext(SongContext);
   const [token2, setToken] = useState("");
   const [loggedIn, setloggedIn] = useState(false);
   const [artistName, setartistName] = artist;
@@ -46,11 +46,37 @@ export default function ButtonAppBar() {
   const [position, setPosition] = pos;
   const [volume, setVolume] = vol;
   const [image, setImage] = imag;
-  const [playing, setPlaying] = play
+  const [playing, setPlaying] = playStatus
   const [deviceId, setdeviceId] = device
   const [trackName, settrackName] =track;
   const [temp,setTemp]=player2;
+  const [data,setData]=Liked
+  const [play,setrecentPlay]=Recent
+  let likedSongs,recentlyPlayed;
 
+
+    const getLikedSongs=()=>{
+      fetch('http://localhost:8000/likedsongs')
+      .then(response=>response.json())
+      .then(val=>{
+          setData(val)
+          // console.log(val)
+          likedSongs=val;
+      }
+
+      )
+  }
+  const getRecentlyPlayed=()=>{
+    fetch('http://localhost:8000/recentlyplayed')
+    .then(response=>response.json())
+    .then(val=>{
+        setrecentPlay(val)
+        // console.log(val)
+        recentlyPlayed=val;
+    }
+
+    )
+}
 
 
 
@@ -62,8 +88,8 @@ export default function ButtonAppBar() {
         ///setData(jsonD.data);
         let x = jsonD.access_token;
         token = jsonD.access_token; 
-        console.log(jsonD);
-        console.log("X=", x);
+        // console.log(jsonD);
+        // console.log("X=", x);
         //await setToken(jsonD.access_token);
         // check();
         setToken(x);
@@ -71,7 +97,7 @@ export default function ButtonAppBar() {
         //console.log(
         //("77777777777777777777777777777777777777777777777777777777777777777");
         // );
-        console.log("Token=", token2);
+        // console.log("Token=", token2);
         // console.log("X=", x);
         //console.log(data, "inside");
       });
@@ -85,15 +111,17 @@ export default function ButtonAppBar() {
 
   const handleLogin = () => {
     if (token) {
-      console.log("inside");
-      console.log(token);
+      // console.log("inside");
+      // console.log(token);
       //newControl({ ...control, loggedIn: true });
       setloggedIn(true);
 
       playerCheckInterval = setInterval(() => checkForPlayer(token), 5000);
       checkForPlayer(token);
-      console.log("Tokennnnnnnnnnnnnnnnnnn");
-      console.log(token);
+      getLikedSongs()
+          getRecentlyPlayed()
+      // console.log("Tokennnnnnnnnnnnnnnnnnn");
+      // console.log(token);
     } else {
       console.log("Nop");
     }
@@ -101,10 +129,14 @@ export default function ButtonAppBar() {
 
 
   const checkForPlayer = (value) => {
+    let name;
       if (window.Spotify != null) {
         console.log("hekki");
+        
+
+        // console.log('----------------------->',name)
         player = new window.Spotify.Player({
-          name: "Hrishi's React Player",
+          name: "My React Player",
           getOAuthToken: (cb) => {
             cb(value);
           },
@@ -114,7 +146,7 @@ export default function ButtonAppBar() {
         createEventHandlers();
         player.connect();
         console.log("ju=---------------");
-        console.log(player);
+        // console.log(player);
 
         clearInterval(playerCheckInterval);
       }
@@ -168,6 +200,7 @@ export default function ButtonAppBar() {
           let { device_id } = data;
           console.log("Let the music play on!");
           console.log(data);
+          
           // newControl({ ...control, deviceId: device_id });
           setdeviceId(device_id);
           console.log("Fianl");
@@ -190,10 +223,10 @@ export default function ButtonAppBar() {
       <AppBar position="fixed" className={classes.temp}>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+            <RadioIcon fontSize="large" />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+            MiniSpotify
           </Typography>
           <Button color="inherit" onClick={() => LoginNow()}>Login</Button>
         </Toolbar>

@@ -2,11 +2,8 @@ import React,{useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
-import {useState,useEffect} from 'react';
+import {useState} from 'react';
 import Popover from '@material-ui/core/Popover';
 import Paper from '@material-ui/core/Paper';
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
@@ -98,9 +95,9 @@ export default function Footer() {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
-  const { artist,dura,pos,vol,imag,play,device,track,player2  } = React.useContext(SongContext);
+  const { artist,dura,pos,vol,imag,playStatus,device,track,player2  } = React.useContext(SongContext);
   const [image, setImage] = imag;
-  const [playing, setPlaying] = play;
+  const [playing, setPlaying] = playStatus;
   const [artistName, setartistName] = artist;
   const [volume, setVolume] = vol;
   const [duration, setDuration] = dura;

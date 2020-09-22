@@ -7,7 +7,14 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import {SongContext} from './SongContext';
 import RadioIcon from '@material-ui/icons/Radio';
+import SearchIcon from '@material-ui/icons/Search';
+import TextField from '@material-ui/core/TextField';
+import { InputBase } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
+
+
 let token, playerCheckInterval,player,playerposition;
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -228,6 +235,12 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             MiniSpotify
           </Typography>
+          <Paper>
+            <InputBase>
+
+            </InputBase>
+          </Paper>
+          <SearchIcon />
           <Button color="inherit" onClick={() => LoginNow()}>Login</Button>
         </Toolbar>
       </AppBar>

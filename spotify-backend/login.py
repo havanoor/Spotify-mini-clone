@@ -162,3 +162,14 @@ def lol():
     print("hi")
 
     
+
+@app.get('/search')
+def getsearchresults(name: str):
+    header={"Authorization": f"Bearer {value['access_token']}"}
+    url='https://api.spotify.com/v1/search?q=raghudixit&type=artist,album,artist,playlist,track,show,episode'
+    val=requests.get(url,headers=header)
+
+
+
+    return val.json()
+

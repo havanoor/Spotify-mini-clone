@@ -1,14 +1,9 @@
 import React from "react";
-import logo from "./logo.svg";
-import ScriptTag from "react-script-tag";
 import "./App.css";
-import Player from "./components/Player";
-import MainControl from "./components/MainControl";
 import HomePage from "./components/HomePage";
-import NavBar from './components/NavBar';
-import SideDrawer from './components/SideDrawer'
 import {SongProvider} from './components/SongContext'
-
+import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
+import SearchPage from './components/SearchPage'
 function App() {
   return (
     <SongProvider >
@@ -19,8 +14,9 @@ function App() {
       ></ScriptTag> */}
       {/* <Player /> */}
       {/* <MainControl /> */}
-
-      <HomePage />
+      {/* <Route> */}
+      < SearchPage/>
+      {/* </Route> */}
       {/* <NavBar /> */}
       {/* <SideDrawer /> */}
     </div>

@@ -12,7 +12,7 @@ response=requests.get(
         + "&scope="
         + scopes
         + "&redirect_uri=http://localhost:8000/logged"
-        + "&login_dialog=true",auth=HTTPBasicAuth('havanoor@gmail.com','Hrishih2spotify')
+        + "&login_dialog=true",auth=HTTPBasicAuth('havanoor@gmail.com','Hrishi2spotify')
 )
 
 

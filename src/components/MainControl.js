@@ -283,7 +283,7 @@ function MainControl() {
               here
             </a>
           </p>
-          <p>
+          <p> 
             <input
               type="text"
               value={token}

@@ -11,6 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import { InputBase } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
+import {Link} from 'react-router-dom'
 
 
 let token, playerCheckInterval,player,playerposition;
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
+  const [sval,setSval]=useState('')
   const { artist,dura,pos,vol,imag,playStatus,device,track,player2,Liked,Recent  } = useContext(SongContext);
   const [token2, setToken] = useState("");
   const [loggedIn, setloggedIn] = useState(false);
@@ -236,11 +238,15 @@ export default function ButtonAppBar() {
             MiniSpotify
           </Typography>
           <Paper>
-            <InputBase>
+            <InputBase onChange={(e) =>
+                //newControl({ ...control, token: e.target.value })
+                setSval(e.target.value) }>
 
             </InputBase>
           </Paper>
-          <SearchIcon />
+          <Link to='/search?name=${sval}'>
+          <SearchIcon  />
+          </Link>
           <Button color="inherit" onClick={() => LoginNow()}>Login</Button>
         </Toolbar>
       </AppBar>

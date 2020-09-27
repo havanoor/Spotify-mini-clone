@@ -119,23 +119,23 @@ def get_recently():
     url='https://api.spotify.com/v1/me/player/recently-played'
     val=requests.get(url,headers=header)
 
-    # for i in val.json()['items']:
-    #     print(i['track']['name'])
-    #     data={
-    #         "images":{  'small':i['track']['album']['images'][2]['url'],
-    #                     'medium':i['track']['album']['images'][1]['url'],
-    #                     'large':i['track']['album']['images'][0]['url']},
-    #         "trackname":i['track']['name'],
-    #         "artists":i['track']['artists'],
+    for i in val.json()['items']:
+        print(i['track']['name'])
+        data={
+            "images":{  'small':i['track']['album']['images'][2]['url'],
+                        'medium':i['track']['album']['images'][1]['url'],
+                        'large':i['track']['album']['images'][0]['url']},
+            "trackname":i['track']['name'],
+            "artists":i['track']['artists'],
 
                         
-    #     }
+        }
 
-    #     details.append(data)
+        details.append(data)
 
 
 
-    return val.json()
+    return details
 
 
 @app.get('/refreshToken')
@@ -168,10 +168,34 @@ def getsearchresults(name: str):
     header={"Authorization": f"Bearer {value['access_token']}"}
     url='https://api.spotify.com/v1/search?q=raghudixit&type=artist,album,artist,playlist,track,show,episode'
     val=requests.get(url,headers=header)
+    final={'albums':[],'artists':[]}
+    for i in val.json()['albums']['items']:
+        temp={}
+        temp['name']=i['name']
+        temp['images']={'small':i['images'][2],'medium':i['images'][1],'large':i['images'][0]}
+        temp['release_date']=i['release_date']
 
-    # for i in val.json():
+        final['albums'].append(temp)
+    
+    for i in val.json()['artists']['items']:
+        temp={}
+        temp['name']=i['name']
+        temp['genres']=i['genres']
+        try:
+            temp['images']={'small':i['images'][2],'medium':i['images'][1],'large':i['images'][0]}
+        except:
+            print("No")
 
 
 
-    return val.json()
+        final['artists'].append(temp)
+
+
+
+
+
+
+
+
+    return final
 

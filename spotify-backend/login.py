@@ -166,7 +166,7 @@ def lol():
 @app.get('/search')
 def getsearchresults(name: str):
     header={"Authorization": f"Bearer {value['access_token']}"}
-    url='https://api.spotify.com/v1/search?q=raghudixit&type=artist,album,artist,playlist,track,show,episode'
+    url=f'https://api.spotify.com/v1/search?q={name}&type=artist,album,artist,playlist,track,show,episode'
     val=requests.get(url,headers=header)
     final={'albums':[],'artists':[]}
     for i in val.json()['albums']['items']:

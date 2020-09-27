@@ -7,19 +7,19 @@ import SearchPage from './components/SearchPage'
 function App() {
   return (
     <SongProvider >
+      <Router>
     <div>
-      {/* <ScriptTag
-        type="text/javascript"
-        src="https://sdk.scdn.co/spotify-player.js"
-      ></ScriptTag> */}
-      {/* <Player /> */}
-      {/* <MainControl /> */}
-      {/* <Route> */}
-      < SearchPage/>
-      {/* </Route> */}
-      {/* <NavBar /> */}
-      {/* <SideDrawer /> */}
+      <Switch>
+      <Route path='/' exact component={HomePage} />
+      <Route path='/search/:name' component={SearchPage} />
+
+      
+      {/* <HomePage /> */}
+      {/* < SearchPage/> */}
+      </Switch>
+      
     </div>
+    </Router>
     </SongProvider>
   );
 }

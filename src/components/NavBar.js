@@ -244,7 +244,7 @@ export default function ButtonAppBar() {
 
             </InputBase>
           </Paper>
-          <Link to='/search?name=${sval}'>
+          <Link to={`/search/${sval}`}>
           <SearchIcon  />
           </Link>
           <Button color="inherit" onClick={() => LoginNow()}>Login</Button>

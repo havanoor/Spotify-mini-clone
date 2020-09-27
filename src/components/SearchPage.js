@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   });
 
 
-function SearchPage(){
+function SearchPage({match}){
     const [value, setValue] =useState(0);
     const classes = useStyles();
     const [search,setSearch]=useState({});
@@ -45,7 +45,7 @@ function SearchPage(){
     useEffect(()=>{
 
       const getSearchResults=()=>{
-      fetch(`http://localhost:8000/search?name=${'Raghu dixit'}`)
+      fetch(`http://localhost:8000/search?name=${match.params.name}`)
       .then(response => response.json())
       .then(val => {
 

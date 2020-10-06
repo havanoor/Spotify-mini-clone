@@ -26,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
     
     
   },
+  searchB:{
+    backgroundColor:"#232931",
+    color:"white",
+    borderRadius:"10px"
+  },
   menuButton: {
     marginRight: theme.spacing(2),
    
@@ -34,11 +39,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
    
   },
+  MysearchIcon:{
+    color:"white"
+  },
   
   temp:{
       
       zIndex: theme.zIndex.drawer + 1,
-      backgroundColor:"#0d7377"
+      backgroundColor:"#191A1F"
   }
 }));
 
@@ -237,15 +245,15 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             MiniSpotify
           </Typography>
-          <Paper>
-            <InputBase onChange={(e) =>
-                //newControl({ ...control, token: e.target.value })
+          <Paper className={classes.searchB}>
+            <InputBase placeholder="   Search here" className={classes.searchB} onChange={(e) =>
+                
                 setSval(e.target.value) }>
 
             </InputBase>
           </Paper>
           <Link to={`/search/${sval}`}>
-          <SearchIcon  />
+          <SearchIcon className={classes.MysearchIcon} />
           </Link>
           <Button color="inherit" onClick={() => LoginNow()}>Login</Button>
         </Toolbar>

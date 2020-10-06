@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
       },
       drawer:{
        
-        width:"200px"
+        width:"20px"
 
       },
       drawerContainer:{
@@ -123,13 +123,6 @@ const useStyles = makeStyles((theme) => ({
 
     
   
-      // setTimeout(() => {
-      //   console.log("Bjassjk");
-      //   console.log(token, "Kya hai ye");
-      //   console.log();
-      // }, 5000);
-    
-  
 
     
 
@@ -137,10 +130,10 @@ const useStyles = makeStyles((theme) => ({
         <div >
            
             <NavBar />
-            <Grid container spacing={1}>
+            <Grid container >
 
             
-            <Grid item xs={2}>
+            <Grid item xs={1}>
       <SideDrawer />
       </Grid>
      

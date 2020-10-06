@@ -8,11 +8,34 @@ import HomeIcon from '@material-ui/icons/Home';
 import List from '@material-ui/core/List';
 import { makeStyles } from '@material-ui/core/styles';
 import {Link} from 'react-router-dom'
-const darwerWidth=150
+const darwerWidth=120
 const useStyles = makeStyles((theme) => ({
     drawerContainer:{
-        width:darwerWidth
-    }
+        width:darwerWidth,
+        // backgroundColor:"yellow",
+        
+        
+
+    },
+    sideBar:{
+      backgroundColor:"#3C50FA",
+      // color:"yellow",
+      margin:"10px 10px 10px 10 px",
+      borderRadius:"10px",
+      textDecoration:"none"
+
+    },
+    side:{
+      background:"#191A1F"
+      
+    },
+    ICON:{
+      color:"white",
+      textDecoration:"None",
+     
+    },
+    
+
     
   }));
 
@@ -27,24 +50,19 @@ function SideDrawer(){
 
 
     return(
-        <div>
+        <div  >
 
-        <Drawer variant="permanent" elevation={0}>
+        <Drawer variant="permanent" elevation={0} classes={{paper:classes.side}}>
 
 
         <Toolbar />
-        <div className={classes.drawerContainer}>
-          <List>
-            {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))} */}
-            <ListItem button key={"Home"}>
+        <div className={classes.drawerContainer} >
+          <List className={classes.main} >
+           
+            <ListItem button key={"Home"} className={classes.sideBar}>
               <Link to='/'>
-              <ListItemIcon><HomeIcon /></ListItemIcon></Link>
-              <Link to='/'><ListItemText primary={"Home"}/></Link>
+              <ListItemIcon><HomeIcon className={classes.ICON} /></ListItemIcon></Link>
+              <Link to='/'><ListItemText primary={"Home"} className={classes.ICON} /></Link>
               
 
             </ListItem>

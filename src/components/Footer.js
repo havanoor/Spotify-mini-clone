@@ -18,7 +18,7 @@ import { Slider, LinearProgress } from "@material-ui/core";
 const useStyles = makeStyles((theme)=>({
   root: {
     
-    backgroundColor:"#323232",
+    backgroundColor:"#191A1F",
     
     bottom:"0px",
     width:"100%",
@@ -32,10 +32,11 @@ const useStyles = makeStyles((theme)=>({
   },
   prgbar: {
     width: 300,
+    height:10,
     display: "block",
     marginLeft: "auto",
     marginRight: "auto",
-    color:"white"
+    color:"3D50FA"
   },
   poppy:{
     width:"500px",
@@ -84,6 +85,9 @@ const useStyles = makeStyles((theme)=>({
     new2:{
       marginLeft:"auto",
       color:"white"
+    },
+    diffbutton:{
+      color:"#3C50FA"
     }
 
 }));
@@ -173,7 +177,7 @@ const playPauseToggle = () => {
                 color="inherit"
                 fontSize="large"
                 onClick={() => playPauseToggle()}
-                className={classes.buttons}
+                className={classes.diffbutton}
               />
             )}
             

@@ -4,6 +4,8 @@ session=requests.session()
 import json
 from pprint import pprint
 from requests.auth import HTTPBasicAuth
+
+
 response=requests.get(
      "https://accounts.spotify.com/authorize"
         + "?response_type=code"

@@ -12,7 +12,7 @@ import SkipNextRoundedIcon from "@material-ui/icons/SkipNextRounded";
 import SkipPreviousRoundedIcon from "@material-ui/icons/SkipPreviousRounded";
 import {SongContext} from './SongContext';
 import { Slider, LinearProgress } from "@material-ui/core";
-
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
 
 
 const useStyles = makeStyles((theme)=>({
@@ -200,7 +200,7 @@ const playPauseToggle = () => {
             onChange={changePosition}
             aria-labelledby="continuous-slider"
           />} />
-      <BottomNavigationAction className={classes.new2} label="Nearby" icon={<LibraryMusicIcon className={classes.buttons} />} onClick={handlePopper} />
+      <BottomNavigationAction className={classes.new2} label="Nearby" icon={<MusicNoteIcon className={classes.buttons} />} onClick={handlePopper} />
       <Popover id={id}
                     open={open}
                     anchorEl={anchorEl}

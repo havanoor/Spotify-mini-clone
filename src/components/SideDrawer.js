@@ -7,7 +7,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import HomeIcon from '@material-ui/icons/Home';
 import List from '@material-ui/core/List';
 import { makeStyles } from '@material-ui/core/styles';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
 const darwerWidth=120
 const useStyles = makeStyles((theme) => ({
     drawerContainer:{
@@ -63,6 +64,13 @@ function SideDrawer(){
               <Link to='/'>
               <ListItemIcon><HomeIcon className={classes.ICON} /></ListItemIcon></Link>
               <Link to='/'><ListItemText primary={"Home"} className={classes.ICON} /></Link>
+              
+
+            </ListItem>
+            <ListItem button key={"Browse"} className={classes.sideBar}>
+              <Link to='/'>
+              <ListItemIcon><LibraryMusicIcon className={classes.ICON} /></ListItemIcon></Link>
+              <Link to='/'><ListItemText primary={"Browse"} className={classes.ICON} /></Link>
               
 
             </ListItem>

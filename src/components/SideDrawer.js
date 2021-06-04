@@ -1,81 +1,81 @@
 import React from 'react'
-import Drawer from '@material-ui/core/Drawer';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Toolbar from '@material-ui/core/Toolbar';
+import './css/sidebar.css';
+import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
-import List from '@material-ui/core/List';
-import { makeStyles } from '@material-ui/core/styles';
-import {Link} from 'react-router-dom'
-const darwerWidth=120
-const useStyles = makeStyles((theme) => ({
-    drawerContainer:{
-        width:darwerWidth,
-        // backgroundColor:"yellow",
-        
-        
+import LibraryBooksRoundedIcon from '@material-ui/icons/LibraryBooksRounded';
+import logo from './spotify-logobw.png'
+import liked from './likedsongs.jpeg'
 
-    },
-    sideBar:{
-      backgroundColor:"#3C50FA",
-      // color:"yellow",
-      margin:"10px 10px 10px 10 px",
-      borderRadius:"10px",
-      textDecoration:"none"
-
-    },
-    side:{
-      background:"#191A1F"
-      
-    },
-    ICON:{
-      color:"white",
-      textDecoration:"None",
-     
-    },
-    
-
-    
-  }));
+function SideDrawer() {
 
 
-function SideDrawer(){
+  return (
+    <div className="sidebar">
 
-    const classes = useStyles();
+
+      <img className="main-logo" src={logo} width={130} />
+
+      <ul className="side-nav-icons">
+        <li><HomeIcon /> Home</li>
+        <li><SearchIcon /> Search</li>
+        <li><LibraryBooksRoundedIcon /> Your library</li>
+      </ul>
 
 
 
+      <div className="tabs-part">
 
+        <div><img src={liked} width={24} alt="images" />Create Playlist</div>
+        <div><img src={liked} width={24} alt="images" /> Liked Songs</div>
 
+      </div>
+      <hr className="sepr" />
 
-    return(
-        <div  >
-
-        <Drawer variant="permanent" elevation={0} classes={{paper:classes.side}}>
-
-
-        <Toolbar />
-        <div className={classes.drawerContainer} >
-          <List className={classes.main} >
-           
-            <ListItem button key={"Home"} className={classes.sideBar}>
-              <Link to='/'>
-              <ListItemIcon><HomeIcon className={classes.ICON} /></ListItemIcon></Link>
-              <Link to='/'><ListItemText primary={"Home"} className={classes.ICON} /></Link>
-              
-
-            </ListItem>
-          </List>
-
-          </div>
-
-
-        </Drawer>
-
-
+      <div className="diff">
+        <div>
+          <ul className="playlists">
+            <li>Amit Trivedi Mix</li>
+            <li>Kailash Kher Mix</li>
+            <li>When Chai Met Toast Mix</li>
+            <li>Tamil Indie</li>
+            <li>Your Top Songs 2020</li>
+          </ul>
         </div>
-    )
+        <br />
+        <div>
+          <ul className="playlists">
+            <li>Kailash kher hits</li>
+            <li>This is Kailash Kher</li>
+            <li>Soulful Sid Sriram</li>
+            <li>Weekend Pop</li>
+            <li>This is Maroon 5</li>
+            <li>This is Maroon 5</li>
+            <li>This is Maroon 5</li>
+            <li>Weekend Pop</li>
+            <li>This is Maroon 5</li>
+            <li>This is Maroon 5</li>
+            <li>This is Maroon 5</li><li>Weekend Pop</li>
+            <li>This is Maroon 5</li>
+            <li>This is Maroon 5</li>
+            <li>This is Maroon 5</li><li>Weekend Pop</li>
+            <li>This is Maroon 5</li>
+            <li>This is Maroon 5</li>
+            <li>This is Maroon 5</li>
+          </ul>
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+
+
+
+
+
+  )
 }
 
 

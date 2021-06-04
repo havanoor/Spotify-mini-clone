@@ -1,0 +1,73 @@
+*{
+   
+    box-sizing: border-box;
+    padding: 0;
+    margin:0;
+    font-size: 0.9rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    /* width:100px; */
+    
+}
+
+.sidebar{
+    background-color: black;
+    color: white;
+    width: 240px;
+    height: 100%;
+    /* overflow-y: scroll; */
+    z-index: 100;
+    font-size: 0.9rem;
+
+}
+
+.sidebar > div{
+    margin-top: 30px;
+}
+
+.main-logo{
+    margin:20px;
+}
+
+.side-nav-icons >  li{
+    margin: 10px 20px  ;
+    padding: 5px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    
+    border-radius: 5px;
+    
+}
+
+.side-nav-icons >  li:hover{
+    background-color:#282828;
+    /* padding:10px; */
+    
+
+}
+
+.tabs-part >div{
+    margin-left:20px;
+    padding: 6px 0;
+    display: flex;
+    gap: 10px;
+
+}
+
+.sepr{
+    margin:20px;
+    /* padding:10px; */
+    color: #282828;
+    
+}
+.playlists > li{
+    margin-left: 20px;
+    list-style: none;
+    padding:  6px  0px;
+}
+
+.diff{
+    height: 360px;
+    /* overflow-y: scroll; */
+    max-height:100%;overflow:auto;
+}

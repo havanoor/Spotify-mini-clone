@@ -1,53 +1,15 @@
-.myimg {
-  /* position: relative;
-
-  left: 510px;
-  top: 104px;
-   */
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  border-radius: 50%;
-  padding:10px 10px 10px 10px;
-
+*{
+   
+  box-sizing: border-box;
+  padding: 0;
+  margin:0;
+  /* font-size: 0.9rem; */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  /* width:100px; */
+  
 }
-.trackname {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 48px;
-  text-align: center;
-  align-items: center;
-}
-
-.artistname {
-  /* position: relative;
-  /* width: 86px;
-  //height: 53px; */
-  /* left: 282px;
-  top: 10px; */
-  font-weight: 300;
-  font-size: 26px;
-  /* line-height: 53px; */
-  text-align: center;
-  color: #b4b4b4;
-}
-.main {
-  align-content: center;
-}
-
-/* * {
-  background-color: #030f2e;
-  color: white;
-} */
-
-.container {
-  display: flex;
-  justify-content: center;
-}
-
 
 body{
-  background-color: #232931;
+  background-color: #121212;
   color: white;
 }

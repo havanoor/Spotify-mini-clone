@@ -1,0 +1,79 @@
+
+
+.right{
+    background-color: #121212;
+}
+
+.bada{
+    display: grid;
+    gap:1rem;
+    grid-template-columns: 1fr 5fr;
+
+}
+
+.upgrade-button{
+    padding:10px 20px;
+    border-radius: 20px;
+    width:110px;
+    background-color: #39FF14;
+    border: none;
+
+}
+
+.top-side{
+    display: flex;
+    justify-content: space-between;
+    margin-top:1rem;
+
+
+}
+
+.login-part{
+    display: flex;
+    margin-right: 1rem;;
+    gap:1rem;
+    align-items: center;
+    /* margin:10px 40px; */
+}
+
+
+.one-block{
+    background-color: #282828;
+    display: flex;
+    gap:10px;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.one-block *{
+    background-color: #282828;
+    /* display: flex; */
+}
+
+
+.top-recently-played-grid{
+    display: grid;
+    gap:1rem;
+    /* background-color:linear-gradient(rgba(0,0,0,.6) 0,#121212 100%); */
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+}
+
+.one-card {
+    background-color: #181818;
+    padding:15px;
+    /* display: flex; */
+
+    
+}
+
+.one-card *{
+    background-color: #181818;
+    
+}
+
+.jump-right-back-in-part{
+    display: flex;
+    gap:2rem;
+    /* justify-content: space-around; */
+
+}

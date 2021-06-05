@@ -39,6 +39,7 @@
 }
 #pgbar{
     height: 4px;
-    /* background-color: green; */
+    background-color: gray;
+    /* color:pink */
     /* -webkit-appearance: none; */
 }

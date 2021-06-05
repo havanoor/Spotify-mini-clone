@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import './css/sidebar.css';
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 import LibraryBooksRoundedIcon from '@material-ui/icons/LibraryBooksRounded';
 import logo from './spotify-logobw.png'
 import liked from './likedsongs.jpeg'
-
+import { SongContext } from './SongContext';
 function SideDrawer() {
+  const { Playlist } = useContext(SongContext)
+  const [playlists, setPlaylists] = Playlist
 
+  useEffect(() => {
+    const getplaylists = () => {
+      fetch('http://localhost:8000/playlists')
+        .then(response => response.json())
+        .then(val => {
+          setPlaylists(val)
+          console.log(val)
 
+        }
+        )
+    }
+    getplaylists()
+  }, [])
   return (
     <div className="sidebar">
 
@@ -34,35 +48,14 @@ function SideDrawer() {
       <div className="diff">
         <div>
           <ul className="playlists">
-            <li>Amit Trivedi Mix</li>
-            <li>Kailash Kher Mix</li>
-            <li>When Chai Met Toast Mix</li>
-            <li>Tamil Indie</li>
-            <li>Your Top Songs 2020</li>
+            {playlists.map((value, index) => (
+              <li key={index}>{value}</li>)
+            )}
+
           </ul>
         </div>
         <br />
-        <div>
-          <ul className="playlists">
-            <li>Kailash kher hits</li>
-            <li>This is Kailash Kher</li>
-            <li>Soulful Sid Sriram</li>
-            <li>Weekend Pop</li>
-            <li>This is Maroon 5</li>
-            <li>This is Maroon 5</li>
-            <li>This is Maroon 5</li>
-            <li>Weekend Pop</li>
-            <li>This is Maroon 5</li>
-            <li>This is Maroon 5</li>
-            <li>This is Maroon 5</li><li>Weekend Pop</li>
-            <li>This is Maroon 5</li>
-            <li>This is Maroon 5</li>
-            <li>This is Maroon 5</li><li>Weekend Pop</li>
-            <li>This is Maroon 5</li>
-            <li>This is Maroon 5</li>
-            <li>This is Maroon 5</li>
-          </ul>
-        </div>
+
       </div>
 
 

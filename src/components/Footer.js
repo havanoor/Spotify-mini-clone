@@ -1,15 +1,6 @@
 import React, { useContext } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
+
 import { useState } from 'react';
-import Popover from '@material-ui/core/Popover';
-import Paper from '@material-ui/core/Paper';
-import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
-import PauseCircleFilledRoundedIcon from "@material-ui/icons/PauseCircleFilledRounded";
-import SkipNextRoundedIcon from "@material-ui/icons/SkipNextRounded";
-import SkipPreviousRoundedIcon from "@material-ui/icons/SkipPreviousRounded";
 import { SongContext } from './SongContext';
 import { Slider, LinearProgress } from "@material-ui/core";
 
@@ -230,9 +221,9 @@ export default function Footer() {
     //     </BottomNavigation>
     //     </div>
 
-    <footer class="foot">
+    <footer className="foot">
       {/* Left part */}
-      <div class="album-part">
+      <div className="album-part">
         <img src={cover} />
         <div >
           <h6>Kudduku</h6>
@@ -243,7 +234,7 @@ export default function Footer() {
 
       </div>
       {/* Middle Player controls */}
-      <div class="player-controls">
+      <div className="player-controls">
         <div>
           <SkipPreviousIcon style={{ fontSize: 30 }} />
           <PlayCircleFilledIcon style={{ fontSize: 30 }} />
@@ -253,7 +244,7 @@ export default function Footer() {
       </div>
 
       {/* Right options */}
-      <div class="right-controls">
+      <div className="right-controls">
 
         <PlaylistPlayIcon />
         <DevicesOtherIcon />

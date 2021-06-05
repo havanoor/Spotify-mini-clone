@@ -21,6 +21,7 @@
 }
 
 .top-side{
+    /* background-image: linear-gradient(red, #121212); */
     display: flex;
     justify-content: space-between;
     margin-top:1rem;
@@ -30,7 +31,7 @@
 
 .login-part{
     display: flex;
-    margin-right: 1rem;;
+    margin-right: 1rem;
     gap:1rem;
     align-items: center;
     /* margin:10px 40px; */

@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { useState } from 'react';
 import { SongContext } from './SongContext';
 import { Slider, LinearProgress } from "@material-ui/core";
-
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
 
 // #NEWWWWW
 

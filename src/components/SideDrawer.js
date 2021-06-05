@@ -10,6 +10,8 @@ function SideDrawer() {
   const { Playlist } = useContext(SongContext)
   const [playlists, setPlaylists] = Playlist
 
+
+
   useEffect(() => {
     const getplaylists = () => {
       fetch('http://localhost:8000/playlists')
@@ -61,7 +63,7 @@ function SideDrawer() {
 
 
 
-    </div>
+    </div >
 
 
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { SongContext } from './SongContext';
 import { Link } from 'react-router-dom'
-
+import SearchIcon from '@material-ui/icons/Search';
 
 import KeyboardArrowRightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
 import KeyboardArrowLeftRoundedIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
@@ -226,9 +226,13 @@ export default function ButtonAppBar() {
     <div className="top-side">
 
       {/* Left arrows */}
-      <div>
+      <div className="lefty">
         <KeyboardArrowLeftRoundedIcon />
         <KeyboardArrowRightRoundedIcon />
+        <input type="text"  className="search-box" onChange={(e) =>setSval(e.target.value) }/>
+        <Link to={`/search/${sval}`}>
+          <SearchIcon />
+        </Link>
       </div>
 
       {/* right part */}

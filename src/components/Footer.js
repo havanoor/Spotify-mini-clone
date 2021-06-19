@@ -6,7 +6,7 @@ import { Slider, LinearProgress } from "@material-ui/core";
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 
 // #NEWWWWW
-
+import PauseCircleFilledIcon from '@material-ui/icons/PauseCircleFilled';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
@@ -224,10 +224,10 @@ export default function Footer() {
     <footer className="foot">
       {/* Left part */}
       <div className="album-part">
-        <img src={cover} />
+      <img src={image[1].url} alt="Not Playing"  />
         <div >
-          <h6>Kudduku</h6>
-          <p>Vineet Sriniva...</p>
+          <h6>{trackName}</h6>
+          <p>{artistName}</p>
 
         </div>
 
@@ -236,11 +236,37 @@ export default function Footer() {
       {/* Middle Player controls */}
       <div className="player-controls">
         <div>
-          <SkipPreviousIcon style={{ fontSize: 30 }} />
-          <PlayCircleFilledIcon style={{ fontSize: 30 }} />
+          <SkipPreviousIcon style={{ fontSize: 30 }} onClick={() => playPreviousTrack()} />
+          {/* <PlayCircleFilledIcon style={{ fontSize: 30 }} /> */}
+
+          {playing ? (
+                  <PlayCircleFilledIcon
+                    color="inherit"
+                    fontSize="large"
+                    onClick={() => playPauseToggle()}
+                    
+                  />
+                ) : (
+                  <PauseCircleFilledIcon
+                    color="inherit"
+                    fontSize="large"
+                    onClick={() => playPauseToggle()}
+                    
+                  />
+                )}
+
+
           <SkipNextIcon style={{ fontSize: 30 }} />
         </div>
-        <progress id="pgbar" value="32" max="100" />
+        {/* <progress id="pgbar" value="32" max="100" /> */}
+        <Slider
+                id={"pgbar"}
+                min={0}
+                max={duration}
+                value={position}
+                onChange={changePosition}
+                aria-labelledby="continuous-slider"
+               />
       </div>
 
       {/* Right options */}
@@ -249,8 +275,18 @@ export default function Footer() {
         <PlaylistPlayIcon />
         <DevicesOtherIcon />
         <VolumeUpIcon />
-        <progress id="volume" value="32" max="100" />
-
+        
+        {/* <input type="range" min="0" max="100" value={volume} class="slider" id="myRange" onChange={handleChange}></input> */}
+        <Slider
+                              id="volume"
+                              value={volume}
+                              min={0}
+                              max={100}
+                              onChange={handleChange}
+                              value={32}
+                              aria-labelledby="continuous-slider"
+                            />
+{/* <progress id="volume" value="32" max="100" hidden/> */}
       </div>
 
 

@@ -8,8 +8,8 @@ import TabContext from '@material-ui/lab/TabContext';
 import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
 import Grid from '@material-ui/core/Grid';
-
-
+import './css/searchpage.css';
+import Footer from './Footer'
 // import { useState } from 'react'
 
 const useStyles = makeStyles({
@@ -41,7 +41,7 @@ function SearchPage({match}){
     const handleChange = (event, newValue) => {
         setValue(newValue);
     }
-
+    console.log("HIII");
     useEffect(()=>{
 
       const getSearchResults=()=>{
@@ -62,10 +62,13 @@ function SearchPage({match}){
 
 
     return(
-        <div>
-        <NavBar />
-        <SideDrawer />
-        <TabContext value={value} className={classes.main}>
+        <div className="bada" >
+          <SideDrawer />
+
+          <div className="right" >
+         <NavBar />
+        {/* <SideDrawer /> */}
+        {/*<TabContext value={value} className={classes.main}>
         <Paper className={classes.searchBar} >
         <TabList onChange={handleChange} aria-label="simple tabs example">
       <Tab label="Albums" value="1" />
@@ -118,8 +121,55 @@ function SearchPage({match}){
     
     </TabPanel>
     </Paper>
-    </TabContext>
+    </TabContext> */}
 
+    <h2>Top Result</h2>
+    <br />
+    <div className="search-topres">
+      <img src={search.albums &&search.albums[0].images.medium.url}  width={90}/>
+      <h2>{search.albums &&search.albums[0].name}</h2>
+      <h6>{search.albums &&search.albums[0].release_date}</h6>
+
+      {/* {search.albums &&search.albums[0].name} */}
+      {/* {//console.log(search.albums)
+      search.albums &&(search.albums).map((value)=>(
+        <Paper elevation={4} className={classes.pap}>
+           <Grid container spacing={1}> 
+            <Grid item xs={4}>
+              <img src={value.images.medium.url} className={classes.myimg}/>
+            </Grid>
+            <Grid item xs={3}>
+          <h3>{value.name}</h3>
+      <h5>Release date:{value.release_date}</h5>
+          </Grid>
+          </Grid> 
+          </Paper>
+           
+        
+      ))
+    } */}
+
+    </div>
+    {/* <h2>Songs</h2> */}
+    <br />
+    <br />
+    <h2>Artists</h2>
+<br />
+    <div className="jump-right-back-in-part">
+          {search.albums &&search.albums.map((value) => (
+            <div className="one-card">
+              <img src={value.images.medium.url} width={153} />
+              <br/>
+              <h5>{value.name}</h5>
+              
+
+            </div>
+          ))}
+        </div>
+    {/* <h2>Albums</h2> */}
+
+        </div>
+        <Footer />
         </div>
     )
 

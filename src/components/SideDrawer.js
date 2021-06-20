@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import './css/sidebar.css';
 import SearchIcon from '@material-ui/icons/Search';
+import { Link } from 'react-router-dom'
 import HomeIcon from '@material-ui/icons/Home';
 import LibraryBooksRoundedIcon from '@material-ui/icons/LibraryBooksRounded';
 import logo from './spotify-logobw.png'
@@ -28,9 +29,9 @@ function SideDrawer() {
   return (
     <div className="sidebar">
 
-
+      <Link to="/">
       <img className="main-logo" src={logo} width={130} />
-
+      </Link>
       <ul className="side-nav-icons">
         <li><HomeIcon /> Home</li>
         <li><SearchIcon /> Search</li>

@@ -37,9 +37,29 @@
     gap:1rem;
     align-items: center;
 }
+
+.playback{
+    display: flex;
+    gap:1rem;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
 #pgbar{
     height: 1px;
     background-color: gray;
     /* color:pink */
     /* -webkit-appearance: none; */
+}
+
+
+#poppy{
+
+    display:none;
+    padding:3rem;
+    flex-direction: column;
+    position: fixed;
+    bottom:100px;
+    right:60px;
 }

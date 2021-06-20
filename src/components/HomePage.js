@@ -7,8 +7,6 @@ import { SongContext } from './SongContext';
 
 // NEwww
 import './css/mainpage.css';
-import KeyboardArrowRightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
-import KeyboardArrowLeftRoundedIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
 
 
 
@@ -165,83 +163,7 @@ function HomePage() {
 
       </div>
 
-      // {/* <NavBar /> */}
-  // {/* <Grid container >
-
-
-        // <Grid item xs={1}>
-         
-        // </Grid>
-
-
-        // <Grid item xs={10}>
-
-
-        //   <b color="red">Recently PLayed</b> 
-        //   <KeyboardArrowLeftIcon onClick={() => previousFour()} />
-        //    <KeyboardArrowRightIcon onClick={() => nextFour()} />
-        //   <Divider />
-
-        //   <Grid container spacing={1}>
-
-        //     {play.slice(start, end).map((value) => (
-
-        //       <Grid item xs={3}>
-
-
-        //         <Paper elevation={0} className={classes.paperdata} >
-        //           <img src={value.images.medium} className="myimg" />
-        //           <Typography align="center">{value.trackname}</Typography>
-
-        //         </Paper>
-
-        //       </Grid>
-
-
-
-
-
-        //     ))}
-
-        //   </Grid>
-        //   <Toolbar />
-
-        //   <b color="red">Liked Songs</b>
-        //   <KeyboardArrowLeftIcon onClick={() => previousFour()} />
-        //   <KeyboardArrowRightIcon onClick={() => nextFour()} />
-        //   <Divider />
-
-        //   <Grid container spacing={1}>
-
-        //     {data.slice(start, end).map((value) => (
-
-        //       <Grid item xs={3}>
-
-
-        //         <Paper elevation={0} className={classes.paperdata} >
-        //           <img src={value.images.medium} className="myimg" />
-        //           <Typography align="center">{value.trackname}</Typography>
-
-        //         </Paper>
-
-        //       </Grid>
-
-
-
-
-
-            // ))}
-
-          // </Grid>
-
-
-        // </Grid>
-
-
-
-
-
-      // </Grid> */}
+     
       <Footer />
     </div >
 

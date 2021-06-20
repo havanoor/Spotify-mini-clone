@@ -197,30 +197,7 @@ export default function ButtonAppBar() {
   };
 
   return (
-    // <div className={classes.root}>
-    //   <AppBar position="fixed" className={classes.temp}>
-    //     <Toolbar>
-    //       <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-    //         <RadioIcon fontSize="large" />
-    //       </IconButton>
-    //       <Typography variant="h6" className={classes.title}>
-    //         MiniSpotify
-    //       </Typography>
-    //       <Paper className={classes.searchB}>
-    //         <InputBase placeholder="   Search here" className={classes.searchB} onChange={(e) =>
-
-    //             setSval(e.target.value) }>
-
-    //         </InputBase>
-    //       </Paper>
-    //       <Link to={`/search/${sval}`}>
-    //       <SearchIcon className={classes.MysearchIcon} />
-    //       </Link>
-    //       <Button color="inherit" onClick={() => LoginNow()}>Login</Button>
-    //     </Toolbar>
-    //   </AppBar>
-    //   <Toolbar />
-    // </div>
+    
 
 
     <div className="top-side">

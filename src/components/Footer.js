@@ -13,7 +13,7 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import DevicesOtherIcon from '@material-ui/icons/DevicesOther';
 import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay';
-import cover from './ladcover.jpg'
+import VolumeDownIcon from '@material-ui/icons/VolumeDown';
 import './css/footer.css'
 
 
@@ -62,71 +62,32 @@ export default function Footer() {
     // this.playerposition = setInterval(() => this.getState(), 1000);
   };
 
-  const handleChange = (event, newValue) => {
-    setVolume(newValue);
-    temp.setVolume(newValue / 100);
+  const handleChange = () => {
+    let x = document.getElementById("volume").value;
+    // console.log("-->",x);
+    setVolume(x);
+    temp.setVolume(x / 100);
   };
   const changePosition = (event, newValue) => {
-    setPosition(newValue);
-    temp.seek(newValue);
+    let x = document.getElementById("pgbar").value;
+    setPosition(x);
+    temp.seek(x);
   };
 
+  const displayWindow=()=>{
+    console.log("Clicked")
+    let chk=document.getElementById("poppy").style.display;
+    console.log(chk)
+    if(chk=="none")
+      {document.getElementById("poppy").style.display = "flex";}
+    else
+      {document.getElementById("poppy").style.display = "none";}
 
+  }
 
 
   return (
-    //     <div className={classes.temp}>
-    //     <BottomNavigation
-    //       value={value}
-    //       onChange={(event, newValue) => {
-    //         setValue(newValue);
-    //       }}
-    //       showLabels
-    //       className={classes.root}
-    //     >
-
-    //       <BottomNavigationAction className={classes.new} icon={<img src={image[1].url} alt="Not Playing"  />} />
-    //       <BottomNavigationAction style={{color:"white"}} label="Previous"  icon={<SkipPreviousRoundedIcon
-    //                       className={classes.buttons}
-    //                       onClick={() => playPreviousTrack()}
-    //                       fontSize="large"
-    //                        />} />
-    //       <BottomNavigationAction style={{color:"white"}}  label={playing?("Play"):("Pause")} icon={playing ? (
-    //               <PlayArrowRoundedIcon
-    //                 color="inherit"
-    //                 fontSize="large"
-    //                 onClick={() => playPauseToggle()}
-    //                 className={classes.buttons}
-    //               />
-    //             ) : (
-    //               <PauseCircleFilledRoundedIcon
-    //                 color="inherit"
-    //                 fontSize="large"
-    //                 onClick={() => playPauseToggle()}
-    //                 className={classes.diffbutton}
-    //               />
-    //             )}
-
-    //             />
-
-    //       <BottomNavigationAction style={{color:"white"}} label="Next" icon={<SkipNextRoundedIcon 
-    //                       onClick={() => playNextTrack()}
-    //                       className={classes.buttons}
-    //                       fontSize="large"
-
-    //                       />
-
-    // } />  
-
-    //       <BottomNavigationAction   icon={<Slider
-    //             className={classes.prgbar}
-    //             min={0}
-    //             max={duration}
-    //             value={position}
-    //             onChange={changePosition}
-    //             aria-labelledby="continuous-slider"
-    //           />} />
-    //       <BottomNavigationAction className={classes.new2} label="Nearby" icon={<LibraryMusicIcon className={classes.buttons} />} onClick={handlePopper} />
+    //     
     //       <Popover id={id}
     //                     open={open}
     //                     anchorEl={anchorEl}
@@ -259,34 +220,58 @@ export default function Footer() {
           <SkipNextIcon style={{ fontSize: 30 }} />
         </div>
         {/* <progress id="pgbar" value="32" max="100" /> */}
-        <Slider
-                id={"pgbar"}
-                min={0}
-                max={duration}
-                value={position}
-                onChange={changePosition}
-                aria-labelledby="continuous-slider"
-               />
+        <input type="range" min="0" max={duration} value={position} id="pgbar" onChange={changePosition}></input>
+       
       </div>
 
       {/* Right options */}
       <div className="right-controls">
 
-        <PlaylistPlayIcon />
+        <PlaylistPlayIcon  onClick={displayWindow}/>
+          <div id="poppy" >
+          
+         
+          {/* <PlayCircleFilledIcon style={{ fontSize: 30 }} /> */}
+          <img src={image[0].url} alt="Not Playing"  />
+          <br/>
+                          <h1 className="trackname">{trackName}</h1>
+                          <h1 className="artistname">{artistName}</h1>
+
+          <div className="playback">
+          <SkipPreviousIcon style={{ fontSize: 30 }} onClick={() => playPreviousTrack()} />                  
+          {playing ? (
+                  <PlayCircleFilledIcon
+                    color="inherit"
+                    fontSize="large"
+                    onClick={() => playPauseToggle()}
+                    
+                  />
+                ) : (
+                  <PauseCircleFilledIcon
+                    color="inherit"
+                    fontSize="large"
+                    onClick={() => playPauseToggle()}
+                    
+                  />
+                )}
+
+          
+          <SkipNextIcon style={{ fontSize: 30 }} />
+          </div>
+          <input type="range" min="0" max={duration} value={position} id="pgbar" onChange={changePosition}></input>
+
+          {/* <VolumeDownIcon />
+        <input type="range" min="0" max="100" value={volume} id="volume" onChange={handleChange}></input>
+        <VolumeUpIcon /> */}
+          
+
+        </div>
         <DevicesOtherIcon />
-        <VolumeUpIcon />
         
-        {/* <input type="range" min="0" max="100" value={volume} class="slider" id="myRange" onChange={handleChange}></input> */}
-        <Slider
-                              id="volume"
-                              value={volume}
-                              min={0}
-                              max={100}
-                              onChange={handleChange}
-                              value={32}
-                              aria-labelledby="continuous-slider"
-                            />
-{/* <progress id="volume" value="32" max="100" hidden/> */}
+        <VolumeDownIcon />
+        <input type="range" min="0" max="100" value={volume} id="volume" onChange={handleChange}></input>
+        <VolumeUpIcon />
+       
       </div>
 
 

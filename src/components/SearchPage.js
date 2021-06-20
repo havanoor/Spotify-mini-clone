@@ -1,41 +1,15 @@
 import React,{useEffect, useState} from 'react';
 import NavBar from './NavBar'
 import SideDrawer from './SideDrawer'
-import Tab from '@material-ui/core/Tab';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
-import TabContext from '@material-ui/lab/TabContext';
-import TabList from '@material-ui/lab/TabList';
-import TabPanel from '@material-ui/lab/TabPanel';
-import Grid from '@material-ui/core/Grid';
 import './css/searchpage.css';
 import Footer from './Footer'
 // import { useState } from 'react'
 
-const useStyles = makeStyles({
-    searchBar: {
-      backgroundColor:"black",
-      color:"#0d7377",
-      marginLeft:"150px"
-
-    },
-    main:{marginLeft:"150px"},
-    indi:{
-      backgroundColor:"black",
-      color:"white"
-    },
-    pap:{
-      margin:"20px"
-    },
-    myimg:{
-      padding:"10px"
-    }
-  });
 
 
 function SearchPage({match}){
     const [value, setValue] =useState(0);
-    const classes = useStyles();
+    
     const [search,setSearch]=useState({});
 
     const handleChange = (event, newValue) => {

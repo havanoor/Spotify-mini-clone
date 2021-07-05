@@ -10,13 +10,15 @@ A simple Spotify Clone built using the Spotify web-playback sdk.
 
 ### Techstack
 
-__Frontend__
+### __Frontend__
 
-<li >React JS </li>
+1. React JS
 
-__Backend__ 
 
-<li>FastAPI</li>
+
+### __Backend__ 
+
+1. FastAPI
 
 
 ## HomePage
@@ -44,6 +46,6 @@ __Backend__
 
 __NOTE__: You'll need a Client ID for setting up a connection with the API.
 
-#### You can create one here.
+#### You can create one here 
  (https://developer.spotify.com/dashboard/applications )
 

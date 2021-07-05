@@ -39,6 +39,7 @@ function HomePage() {
       fetch('http://localhost:8000/recentlyplayed')
         .then(response => response.json())
         .then(val => {
+          
           setrecentPlay(val)
 
         }
@@ -138,7 +139,7 @@ function HomePage() {
             <div key={index} className="one-card">
               <img src={value.images.medium} width={153} />
               <h4>{value.trackname}</h4>
-              <h5>When Chai met Toast</h5>
+              <h5>{value.artists[0].name}</h5>
 
             </div>
           ))}
